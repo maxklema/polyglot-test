@@ -7,7 +7,7 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:5000',
     },
-    allowedHosts: ['test-app-maxz.opensource.mieweb.org']
+    allowedHosts: 'all'
   },
   build: {
     outDir: 'dist',
