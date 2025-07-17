@@ -7,7 +7,7 @@ CORS(app)  # Enable CORS for development
 
 @app.route("/api/message")
 def get_message():
-    return jsonify({"message": "Hello from Flask!!!"})
+    return jsonify({"message": "Hello from Flask!!! If you see this then it updated."})
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
