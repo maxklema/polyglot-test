@@ -24,15 +24,12 @@ jobs:
           http_port: 32000
           public_key: ${{ secrets.PUBLIC_KEY }}
           deploy_on_start: y
-          project_repository: https://github.com/maxklema/polyglot-test
           require_env_vars: y
           container_env_vars: '{"frontend": { "api_key": "123"}, "backend": { "password": "abc123" }}'
           install_command: '{"frontend": "npm i", "backend": "pip install -r ../requirements.txt"}'
-          build_command:
           start_command: '{"frontend": "npm run dev", "backend": "FLASK_ENV=development flask run"}'
           runtime_language: '{"frontend": "nodejs", "backend": "python"}'
           require_services: y
           services: '["mongodb", "docker"]'
-          custom_services:
-          linux_distribution: 2 #debian
+          linux_distribution: debian
           multi_component: y
