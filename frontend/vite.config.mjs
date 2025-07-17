@@ -1,3 +1,4 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -7,7 +8,7 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:5000',
     },
-    allowedHosts: ["polyglot-test-maxklema-main.opensource.mieweb.org", "*"]
+    allowedHosts: 'all', // Allow all hosts
   },
   build: {
     outDir: 'dist',
@@ -15,4 +16,3 @@ export default defineConfig({
     emptyOutDir: true,
   },
 });
-
