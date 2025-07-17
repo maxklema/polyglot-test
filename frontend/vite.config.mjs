@@ -7,7 +7,7 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:5000',
     },
-    allowedHosts: ['"polyglot-test-maxklema-main.opensource.mieweb.org"']
+    allowedHosts: ["polyglot-test-maxklema-main.opensource.mieweb.org", "*"]
   },
   build: {
     outDir: 'dist',
