@@ -45,16 +45,5 @@ jobs:
           http_port: 32000
           linux_distribution: rocky
           public_key: ${{ secrets.PUBLIC_KEY }}
-          deploy_on_start: y
-          multi_component: y
-          require_env_vars: y
-          container_env_vars: '{"frontend": { "test-frontend": "123"}, "backend": {"test-backend": "ABC"}}'
-          install_command: '{"frontend": "npm install", "backend": "pip install -r ../requirements.txt"}'
-          build_command: '{}'
-          start_command: '{"frontend": "npm run dev", "backend": "FLASK_ENV=deployment flask run"}'
-          runtime_language: '{"frontend": "nodejs", "backend": "python"}'
-          require_services: y
-          services: '["mongodb", "docker"]'
-          custom_services:
           github_pat: ${{ secrets.GH_PAT }}
           create_runner_job: n
