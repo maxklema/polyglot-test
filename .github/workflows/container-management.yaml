@@ -8,8 +8,29 @@ on:
   delete:
 
 jobs:
+  setup-runner:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'push' || github.event.created == false
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y sshpass jq
+
+      - uses: maxklema/mie-opensource-action@main
+        with:
+          github_event_name: ${{ github.event_name }}
+          github_repository: ${{ github.event.repository.name }}
+          github_repository_owner: ${{ github.repository_owner }}
+          github_ref_name: ${{ github.event.ref }}
+          proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
+          proxmox_username: mklema
+          container_password: ${{ secrets.CONTAINER_PASSWORD }}
+          linux_distribution: rocky
+          github_pat: ${{ secrets.GH_PAT }}
+          create_runner_job: y
   manage-container:
     runs-on: self-hosted
+    needs: setup-runner
     if: github.event_name != 'push' || github.event.created == false
     steps:
       - uses: maxklema/mie-opensource-action@main
@@ -22,14 +43,17 @@ jobs:
           proxmox_username: mklema
           container_password: ${{ secrets.CONTAINER_PASSWORD }}
           http_port: 32000
+          linux_distribution: rocky
           public_key: ${{ secrets.PUBLIC_KEY }}
           deploy_on_start: y
           require_env_vars: y
-          container_env_vars: '{"frontend": { "api_key": "123"}, "backend": { "password": "abc123" }}'
-          install_command: '{"frontend": "npm i", "backend": "pip install -r ../requirements.txt"}'
-          start_command: '{"frontend": "npm run dev", "backend": "FLASK_ENV=development flask run"}'
+          container_env_vars: '{"frontend": { "test-frontend": "123"}, "backend": {"test-backend": "ABC"}}'
+          install_command: '{"frontend": "npm install", "backend": "pip install -r ../requirements.txt"}'
+          build_command: '{}'
+          start_command: '{"frontend": "npm run dev", "backend": "FLASK_ENV=deployment flask run"}'
           runtime_language: '{"frontend": "nodejs", "backend": "python"}'
           require_services: y
           services: '["mongodb", "docker"]'
-          linux_distribution: debian
-          multi_component: y
+          custom_services:
+          github_pat: ${{ secrets.GH_PAT }}
+          create_runner_job: n
