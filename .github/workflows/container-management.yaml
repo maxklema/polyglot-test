@@ -46,6 +46,7 @@ jobs:
           linux_distribution: rocky
           public_key: ${{ secrets.PUBLIC_KEY }}
           deploy_on_start: y
+          multi_component: y
           require_env_vars: y
           container_env_vars: '{"frontend": { "test-frontend": "123"}, "backend": {"test-backend": "ABC"}}'
           install_command: '{"frontend": "npm install", "backend": "pip install -r ../requirements.txt"}'
