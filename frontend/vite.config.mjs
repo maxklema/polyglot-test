@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:5000',
     },
-    allowedHosts: ['test-demo-2.opensource.mieweb.org'], // Allow all hosts
+    allowedHosts: ['test-demo-3.opensource.mieweb.org'], // Allow all hosts
   },
   build: {
     outDir: 'dist',
