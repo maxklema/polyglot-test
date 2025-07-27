@@ -40,7 +40,7 @@ jobs:
           github_repository_owner: ${{ github.repository_owner }}
           github_ref_name: ${{ github.event.ref }}
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-          proxmox_username: mklema
+          proxmox_username: demouser
           container_password: ${{ secrets.CONTAINER_PASSWORD }}
           http_port: 32000
           linux_distribution: rocky
@@ -50,11 +50,13 @@ jobs:
           require_env_vars: y
           container_env_vars: '{"frontend": { "test-frontend": "123"}, "backend": {"test-backend": "ABC"}}'
           install_command: '{"frontend": "npm install", "backend": "pip install -r ../requirements.txt"}'
-          build_command: '{}'
+          build_command: "{}"
           start_command: '{"frontend": "npm run dev", "backend": "FLASK_ENV=deployment flask run"}'
           runtime_language: '{"frontend": "nodejs", "backend": "python"}'
           require_services: y
+          project_root: /
           services: '["mongodb", "docker"]'
-          custom_services:
+          custom_services: "[[]]"
+          root_start_command: docker-compose up
           github_pat: ${{ secrets.GH_PAT }}
           create_runner_job: n
