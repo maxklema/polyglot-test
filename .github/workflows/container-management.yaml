@@ -23,7 +23,7 @@ jobs:
           github_repository_owner: ${{ github.repository_owner }}
           github_ref_name: ${{ github.event.ref }}
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-          proxmox_username: mklema
+          proxmox_username: demouser
           container_password: ${{ secrets.CONTAINER_PASSWORD }}
           linux_distribution: rocky
           github_pat: ${{ secrets.GH_PAT }}
