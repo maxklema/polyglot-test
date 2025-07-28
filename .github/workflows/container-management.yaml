@@ -57,6 +57,6 @@ jobs:
           project_root: /
           services: '["mongodb", "docker"]'
           custom_services: ''
-          root_start_command: docker-compose up
+          root_start_command:
           github_pat: ${{ secrets.GH_PAT }}
           create_runner_job: n
