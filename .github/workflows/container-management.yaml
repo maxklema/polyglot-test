@@ -6,29 +6,14 @@ on:
     delete:
   
 jobs:
-    setup-runner:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Install Dependencies
-              run: |
-                sudo apt-get update
-                sudo apt install -y sshpass jq
-            - name: Setting up runner
-              uses: maxklema/proxmox-launchpad@main
-              with:
-                proxmox_username: mklema
-                proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-                github_pat: ${{ secrets.RUNNER_PAT }}
     deploy:
         runs-on: self-hosted
-        needs: setup-runner
         steps:
           - name: Deploy to Proxmox
             uses: maxklema/proxmox-launchpad@main
             with: 
                 proxmox_username: mklema
                 proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-                github_pat: ${{ secrets.RUNNER_PAT }}
                 http_port: 32000
                 linux_distribution: rocky
                 container_env_vars: '{"frontend": { "test-frontend": "123"}, "backend": {"test-backend": "ABC"}}'
