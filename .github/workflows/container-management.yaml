@@ -16,7 +16,7 @@ jobs:
                 proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
                 http_port: 32000
                 linux_distribution: rocky
-                container_env_vars: '{"frontend": { "test-frontend": "123"}, "backend": {"test-backend": "ABC"}}'
+                container_env_vars: '{"frontend": { "frontend": "789"}, "backend": {"backend": "DEF"}}'
                 install_command: '{"frontend": "npm install", "backend": "pip install -r ../requirements.txt"}'
                 start_command: '{"frontend": "npm run dev", "backend": "FLASK_ENV=deployment flask run"}'
                 runtime_language: '{"frontend": "nodejs", "backend": "python"}'
